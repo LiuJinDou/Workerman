@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>多人聊天室</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+            .left{
+                display: block; 
+                max-width: 300px;
+                min-width: 80px;
+                text-align: left;
+                line-height: 30px;
+                background-color: #66ccff; 
+                border: 1px #000 solid;
+                white-space: normal; 
+                overflow: visible;
+                word-break:break-all;
+                border-radius: 6px;
+                float: left;
+            }
+            .right{
+                clear: both;
+                display: block; 
+                max-width: 300px;
+                min-width: 80px;
+                text-align: left;
+                line-height: 30px;
+                background-color: #99ff99; 
+                border: 1px #000 solid;
+                white-space: normal; 
+                overflow: visible;
+                word-break:break-all;
+                border-radius: 6px;
+                float: right;
+            }
+            .message-left{
+                clear: both;
+            }
+            .message-right{
+                float: right;
+                clear: both;
+            }
+            #message-box{
+                overflow:auto;
+                display: block; 
+                width: 500px; 
+                height: 400px; 
+                background-image: url('back.jpg');
+                border: 1px #000 solid
+            }
+            .message{
+                clear: both;
+                text-align: center;
+                background-color: #ccffff;
+                line-height: 30px;
+                border: 1px #000 solid;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 >Shadow</h1>
+        <div id="message-box">
+        </div>
+        <input type="text" id="send-message"/><input type="button" id="send-input" value="发送"/> &nbsp;
+        <input type="button" id="exit-input" value="退出聊天室"/>
+        <hr />
+        <div>
+            <ol id="online-user-list"></ol>
+        </div>
+        <div class="template-left" style="display:none">
+            <div class="message-left"></div>
+            <div class="left"></div>
+        </div>
+        <div class="template-right" style="display:none">
+            <div class="message-right"></div>
+            <div class="right"></div>
+        </div>
+        <div class="template-message" style="display:none">
+            <div class="message"></div>
+        </div>
+        <script src="../sign/js/jquery.js"></script>
+        <script>
+//            提示用户输入昵称
+            var nickname = prompt('请输入一个华丽的昵称');
+            var uid = null;
+//            判断昵称是否合法
+            if(nickname && nickname!='' && nickname.length>=2){
+                     // 假设服务端ip为127.0.0.1
+                    var ws = new WebSocket("ws://192.168.45.15:2000");
+                        ws.onopen = function() {
+                            var data = {
+                                action:'online',
+                                nickname:nickname
+                            };
+                        send(data);
+                    };
+        //            接受返回的数据
+                    ws.onmessage = function(e) {
+                        var data = JSON.parse(e.data);
+                        switch(data.action){
+                            case 'online':
+                                   uid = uid ? uid : data.uid;
+                                   online(data.nickname,data.uid);
+                                   updateUserList(data.userlist);
+                                   break;
+                               case 'message' :
+                                   message(data);
+                                   break;
+                        }
+                    };
+            }else{
+                nickname = prompt('请输入一个华丽的昵称');
+            }
+
+
+            function message(data) {
+                var template;
+                if (data.from == uid) {
+                    template = $('.template-right').clone();
+                    template.find('.message-right').text(data.time + ' ' + data.nickname);
+                    template.find('.right').text(data.message);
+                } else {
+                    template = $('.template-left').clone();
+                    template.find('.message-left').text(data.nickname + ' ' + data.time);
+                    template.find('.left').text(data.message);
+                }
+                appendHtml(template.html());
+            }
+//            点击发送数据发送到服务器
+            $('#send-input').click(function () {
+                var con = $('#send-message').val().replace(/^\s+|\s+$/g,"");
+                if(con == ''){
+                    return false;
+                }
+                var data = {
+                    action: 'message',
+                    message: con
+                };
+                send(data);
+                $('#send-message').val('');
+            });
+
+//            发送数据
+            function send(data){
+//                将字符串转化为对象
+                ws.send(JSON.stringify(data));
+            }
+
+            function online(nickname, uid) {
+                var template = $('.template-message').clone();
+                template.show().find('.message').text('欢迎【' + nickname + '】上线！');
+                appendHtml(template.html());
+            }
+
+            function updateUserList(list) {
+                $('#online-user-list').empty();
+                for (var i = 0; i < list.length; i++) {
+                    $('#online-user-list').append('<li>' + list[i] + '</li>');
+                }
+            }
+            $('#send-message').keydown(function (event) {
+                if (event.key == 'Enter') {
+                    $('#send-input').trigger('click');
+                }
+            });
+            function appendHtml(html) {
+                $('#message-box').append(html);
+                var div = document.getElementById('message-box');
+                div.scrollTop = div.scrollHeight;
+            }
+            $('#exit-input').click(function(){
+                location=location 
+            })
+        </script> 
+    </body>
+</html>

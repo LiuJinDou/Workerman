@@ -1,0 +1,43 @@
+2018-11-16 07:44:03 pid:1 ArgumentCountError: Too few arguments to function WebIM::{closure}(), 1 passed and exactly 2 expected in D:\phpStudy\PHPTutorial\WWW\WorkSocket\service.php:22
+Stack trace:
+#0 [internal function]: WebIM->{closure}(Object(Workerman\Connection\TcpConnection))
+#1 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(2388): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection))
+#2 [internal function]: Workerman\Worker->acceptConnection(Resource id #11)
+#3 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#4 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(2321): Workerman\Events\Select->loop()
+#5 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(1315): Workerman\Worker->run()
+#6 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(1258): Workerman\Worker::forkWorkersForWindows()
+#7 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(507): Workerman\Worker::forkWorkers()
+#8 D:\phpStudy\PHPTutorial\WWW\WorkSocket\service.php(27): Workerman\Worker::runAll()
+#9 D:\phpStudy\PHPTutorial\WWW\WorkSocket\service.php(34): WebIM->__construct()
+#10 {main}
+2018-11-16 07:44:03 pid:1 Worker process terminated
+2018-11-16 07:47:09 pid:1 ArgumentCountError: Too few arguments to function WebIM::{closure}(), 1 passed and exactly 2 expected in D:\phpStudy\PHPTutorial\WWW\WorkSocket\service.php:21
+Stack trace:
+#0 [internal function]: WebIM->{closure}(Object(Workerman\Connection\TcpConnection))
+#1 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(2388): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection))
+#2 [internal function]: Workerman\Worker->acceptConnection(Resource id #10)
+#3 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#4 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(2321): Workerman\Events\Select->loop()
+#5 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(1315): Workerman\Worker->run()
+#6 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(1258): Workerman\Worker::forkWorkersForWindows()
+#7 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(507): Workerman\Worker::forkWorkers()
+#8 D:\phpStudy\PHPTutorial\WWW\WorkSocket\service.php(25): Workerman\Worker::runAll()
+#9 D:\phpStudy\PHPTutorial\WWW\WorkSocket\service.php(32): WebIM->__construct()
+#10 {main}
+2018-11-16 07:47:09 pid:1 Worker process terminated
+2018-11-16 08:16:53 pid:1 Error: Call to undefined method WebIM::sendMsg() in D:\phpStudy\PHPTutorial\WWW\WorkSocket\service.php:57
+Stack trace:
+#0 D:\phpStudy\PHPTutorial\WWW\WorkSocket\service.php(24): WebIM->online(Object(Workerman\Connection\TcpConnection), Array)
+#1 [internal function]: WebIM->{closure}(Object(Workerman\Connection\TcpConnection), '{"action":"onli...')
+#2 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Connection\TcpConnection.php(658): call_user_func(Object(Closure), Object(Workerman\Connection\TcpConnection), '{"action":"onli...')
+#3 [internal function]: Workerman\Connection\TcpConnection->baseRead(Resource id #15)
+#4 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Events\Select.php(294): call_user_func_array(Array, Array)
+#5 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(2321): Workerman\Events\Select->loop()
+#6 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(1315): Workerman\Worker->run()
+#7 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(1258): Workerman\Worker::forkWorkersForWindows()
+#8 D:\phpStudy\PHPTutorial\WWW\WorkSocket\Workerman\Worker.php(507): Workerman\Worker::forkWorkers()
+#9 D:\phpStudy\PHPTutorial\WWW\WorkSocket\service.php(41): Workerman\Worker::runAll()
+#10 D:\phpStudy\PHPTutorial\WWW\WorkSocket\service.php(80): WebIM->__construct()
+#11 {main}
+2018-11-16 08:16:53 pid:1 Worker process terminated
